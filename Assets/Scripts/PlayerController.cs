@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(NavMeshAgent))]
 
@@ -10,19 +11,36 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(1))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        var mouse = Mouse.current;
+        if (mouse == null || Camera.main == null) return;
 
-            if (Physics.Raycast(ray, out hit))
+        if (mouse.rightButton.wasPressedThisFrame)
+        {
+            Debug.Log("Right click detected");
+            Vector2 mousePos = mouse.position.ReadValue();
+            Vector2 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            // We "fire" a raycast at a single point (direction zero, distance zero)
+            // to see if there is a 2D collider underneath the cursor.
+            RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+
+            if (hit.collider != null)
             {
+                Debug.Log("Hit: " + hit.collider.name);
+                
+                // Now hit.point works because 'hit' is a RaycastHit2D!
                 agent.SetDestination(hit.point);
+            }
+            else
+            {
+                Debug.Log("No collider hit");
             }
         }
     }
