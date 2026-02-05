@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
+    public GameObject idk;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,8 +36,10 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Hit: " + hit.collider.name);
                 
+                GameObject thingy = Instantiate(idk, new Vector3(hit.point.x, hit.point.y, 0), Quaternion.identity);
                 // Now hit.point works because 'hit' is a RaycastHit2D!
                 agent.SetDestination(hit.point);
+                Destroy(thingy, 0.2f);
             }
             else
             {
