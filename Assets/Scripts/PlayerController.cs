@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     public GameObject idk;
+    private PlayerAnimController spriteAnimator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        spriteAnimator = transform.Find("PlayerSprite").GetComponent<PlayerAnimController>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -39,12 +41,17 @@ public class PlayerController : MonoBehaviour
                 GameObject thingy = Instantiate(idk, new Vector3(hit.point.x, hit.point.y, 0), Quaternion.identity);
                 // Now hit.point works because 'hit' is a RaycastHit2D!
                 agent.SetDestination(hit.point);
+                spriteAnimator.SetWalkBoolean(true);
                 Destroy(thingy, 0.2f);
             }
             else
             {
                 Debug.Log("No collider hit");
             }
+        }
+        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            spriteAnimator.SetWalkBoolean(false);
         }
     }
 }
