@@ -8,6 +8,14 @@ public class PlayerController : MonoBehaviour
 {
     private NavMeshAgent agent;
     public GameObject idk;
+
+    [Header("Player Stats")]
+    public float health = 100;
+    public float maxHealth = 100;
+    public float damage = 25;
+    public float damageMultiplier = 1.0f;
+    public float xp = 0;
+    public float attackRadius = 1f;
     private PlayerAnimController spriteAnimator;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +31,21 @@ public class PlayerController : MonoBehaviour
     {
         var mouse = Mouse.current;
         if (mouse == null || Camera.main == null) return;
+
+        if (mouse.leftButton.wasPressedThisFrame)
+        {
+            Debug.Log("Attacking");
+            Collider2D[] hits = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y - 1.5f), attackRadius);
+            Debug.DrawLine(new Vector2(transform.position.x, transform.position.y - 1.5f) + Vector2.right * 0.1f, new Vector2(transform.position.x, transform.position.y - 1.5f) - Vector2.right * 0.1f, Color.red, attackRadius);
+            foreach (var hit in hits)
+            {
+                if (hit.GetComponent<DamageableBug>() != null)
+                {
+                    hit.GetComponent<DamageableBug>().TakeDamage(damage * damageMultiplier);
+                    break;
+                }
+            }
+        }
 
         if (mouse.rightButton.wasPressedThisFrame)
         {
@@ -53,5 +76,18 @@ public class PlayerController : MonoBehaviour
         {
             spriteAnimator.SetWalkBoolean(false);
         }
+    }
+    public void HealPlayer(float healAmount)
+    {
+        health += healAmount;
+        if (health > maxHealth) health = maxHealth;
+    }
+    public void GrantPlayerSomeBuff(float extraDamageMultiplier, float extraHealthAmount, float extraMaxHealthAmount, float extraXP)
+    {
+        damageMultiplier += extraDamageMultiplier;
+        maxHealth += extraMaxHealthAmount;
+        health += extraHealthAmount;
+        if (health > maxHealth) health = maxHealth;
+        xp += extraXP;
     }
 }
