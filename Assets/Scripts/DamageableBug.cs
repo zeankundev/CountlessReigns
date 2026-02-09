@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,11 +30,19 @@ public class DamageableBug : MonoBehaviour
     private Transform playerTransform;
     private Animator animator;
     private RectTransform healthBar;
+    private TMP_Text damageText;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        Transform damageTextTransform = transform.Find("DamageText");
+        if (damageTextTransform != null)
+        {
+            Debug.Log("DamageText not null");
+            damageText = damageTextTransform.GetComponent<TMP_Text>();
+            Debug.Log("DamageText component: " + damageText);
+        }
         
         // 2D Physics/Rotation setup
         agent.updateRotation = false;
@@ -77,6 +87,32 @@ public class DamageableBug : MonoBehaviour
         if (health <= 0)
         {
             Die();
+        }
+        StartCoroutine(ShowDamageText(amount));
+        animator.SetTrigger("Take Damage");
+    }
+    public float GetMeHealth()
+    {
+        return health;
+    }
+    public bool WillBeTeleported()
+    {
+        return teleportPlayerBack;
+    }
+    IEnumerator ShowDamageText(float amount)
+    {
+        if (damageText != null)
+        {
+            Debug.Log("Showing damage text: " + amount);
+            damageText.text = amount.ToString();
+            damageText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            damageText.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("Damage text component is null.");
+            yield return null;
         }
     }
     void Die()

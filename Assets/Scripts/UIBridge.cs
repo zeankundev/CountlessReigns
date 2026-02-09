@@ -6,7 +6,7 @@ public class UIBridge : MonoBehaviour
 {
     private TMP_Text subtitleText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         subtitleText = transform.Find("OutlineText").GetComponent<TMP_Text>();
         Debug.LogWarning(subtitleText);
