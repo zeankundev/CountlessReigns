@@ -2243,6 +2243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Bug (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8179179504535836357, guid: 6240c346efd67a63bab53e83cf113762, type: 3}
+      propertyPath: teleportPlayerBack
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2350,6 +2354,7 @@ MonoBehaviour:
   attackSound1: {fileID: 8300000, guid: 0462e159606ce7f618be2d1cdf994866, type: 3}
   attackSound2: {fileID: 8300000, guid: 696fabead800e9a0a82769d1d13796ce, type: 3}
   killed: {fileID: 8300000, guid: ba7f099360a494eb4836a0c061c5a03f, type: 3}
+  teleported: {fileID: 8300000, guid: ad60efff7be8b95228dd5a9c474d8df5, type: 3}
 --- !u!195 &1164736547
 NavMeshAgent:
   m_ObjectHideFlags: 0

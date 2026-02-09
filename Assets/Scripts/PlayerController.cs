@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator FreezeAsPartOfLore()
     {
-        float timer = 30f;
+        float timer = 20f;
         float audioOffset = 0f;
         audioSource.PlayOneShot(teleported);
         isFrozen = true;
@@ -56,11 +56,17 @@ public class PlayerController : MonoBehaviour
         {
             timer -= Time.deltaTime;
             audioOffset += Time.deltaTime;
-            if (audioOffset == 0.105f) bridge.DisplayText("Wha.. wha.. what.. *gasps*. Why??", 3.286f);
+            if (audioOffset >= 0.105f && audioOffset < 0.105f + Time.deltaTime) bridge.DisplayText("Wha.. wha.. what.. *gasps*. Why??", 3.286f);
+            else if (audioOffset >= 3.939f && audioOffset < 3.939f + Time.deltaTime) bridge.DisplayText("Why am I teleported back here?", 2.246f);
+            else if (audioOffset >= 8.189f && audioOffset < 8.189f + Time.deltaTime) bridge.DisplayText("Didn't that just... that big goblin...", 3.213f);
+            else if (audioOffset >= 12.680f && audioOffset < 12.680f + Time.deltaTime) bridge.DisplayText("...granted me superpowers, but....", 1.693f);
+            else if (audioOffset >= 16.412f && audioOffset < 16.412f + Time.deltaTime) bridge.DisplayText("...it made me right back here? How ridiculous!", 4.008f);
+
             yield return null;
         } 
         isFrozen = false;
         agent.isStopped = false;
+        agent.SetDestination(new Vector3(0, -1.5f, 0));
     }
 
     // Update is called once per frame
