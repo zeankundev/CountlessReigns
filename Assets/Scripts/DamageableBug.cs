@@ -71,6 +71,7 @@ public class DamageableBug : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        Debug.Log("Bug took " + amount + " damage.");
         health -= amount;
         healthBar.localScale = new Vector3(Mathf.Clamp01(health / maxHealth * 1.849104f), 0.1146779f, 1);
         if (health <= 0)

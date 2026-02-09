@@ -17,13 +17,16 @@ public class PlayerController : MonoBehaviour
     public float xp = 0;
     public float attackRadius = 1f;
     private PlayerAnimController spriteAnimator;
+    private UIBridge bridge;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        bridge = GameObject.Find("Canvas").GetComponent<UIBridge>();
         spriteAnimator = transform.Find("PlayerSprite").GetComponent<PlayerAnimController>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        bridge.DisplayText("aaaa", 2.0f);
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
         if (mouse.leftButton.wasPressedThisFrame)
         {
+            bridge.DisplayText("Attacking!", 1.0f);
             Debug.Log("Attacking");
             Collider2D[] hits = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y - 1.5f), attackRadius);
             Debug.DrawLine(new Vector2(transform.position.x, transform.position.y - 1.5f) + Vector2.right * 0.1f, new Vector2(transform.position.x, transform.position.y - 1.5f) - Vector2.right * 0.1f, Color.red, attackRadius);
@@ -41,7 +45,9 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.GetComponent<DamageableBug>() != null)
                 {
-                    hit.GetComponent<DamageableBug>().TakeDamage(damage * damageMultiplier);
+                    float damageDealt = damage * damageMultiplier;
+                    Debug.Log("Dealt " + damageDealt + " to " + hit.name);
+                    hit.GetComponent<DamageableBug>().TakeDamage(damageDealt);
                     break;
                 }
             }
