@@ -95,6 +95,10 @@ public class DamageableBug : MonoBehaviour
     {
         return health;
     }
+    public float GetMeMaxHealth()
+    {
+        return maxHealth;
+    }
     public bool WillBeTeleported()
     {
         return teleportPlayerBack;

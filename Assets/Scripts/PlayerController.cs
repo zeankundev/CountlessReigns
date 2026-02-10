@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour
     {
         float timer = 20f;
         float audioOffset = 0f;
+        bridge.UpdateTimedStatus(1.0f);
+        bridge.ShowTimedStatus("Frozen & Teleported!");
+        bridge.ToggleTimedStatusState(true);
         audioSource.PlayOneShot(teleported);
         isFrozen = true;
         agent.isStopped = true;
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             timer -= Time.deltaTime;
             audioOffset += Time.deltaTime;
+            bridge.UpdateTimedStatus(timer / 20f);
             if (audioOffset >= 0.105f && audioOffset < 0.105f + Time.deltaTime) bridge.DisplayText("Wha.. wha.. what.. *gasps*. Why??", 3.286f);
             else if (audioOffset >= 3.939f && audioOffset < 3.939f + Time.deltaTime) bridge.DisplayText("Why am I teleported back here?", 2.246f);
             else if (audioOffset >= 8.189f && audioOffset < 8.189f + Time.deltaTime) bridge.DisplayText("Didn't that just... that big goblin...", 3.213f);
@@ -67,6 +71,7 @@ public class PlayerController : MonoBehaviour
         isFrozen = false;
         agent.isStopped = false;
         agent.SetDestination(new Vector3(0, -1.5f, 0));
+        bridge.ToggleTimedStatusState(false);
     }
 
     // Update is called once per frame
@@ -102,7 +107,7 @@ public class PlayerController : MonoBehaviour
                                 bridge.DisplayText("Alright, one down! That's for me!", 3.549f);
                             }
                         }
-                        else if (hit.GetComponent<DamageableBug>().GetMeHealth() <= 25)
+                        else if ((hit.GetComponent<DamageableBug>().GetMeHealth() / hit.GetComponent<DamageableBug>().GetMeMaxHealth()) <= 0.05)
                         {
                             // Enemy is below or equal to 10 health, don't play attack sound
                         }
