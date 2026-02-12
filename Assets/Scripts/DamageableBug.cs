@@ -10,6 +10,7 @@ public class DamageableBug : MonoBehaviour
     [Header("Detection Settings")]
     public float detectionRadius = 10f;
     public float keepDistance = 1.2f; // Distance to stop before hitting player
+    public float attackRadius = 1.0f;
 
     [Header("Bug Stats")]
     public float damage = 20;
@@ -72,6 +73,13 @@ public class DamageableBug : MonoBehaviour
         {
             // Clear path if player escapes radius
             if (agent.hasPath) agent.ResetPath();
+        }
+        if (distanceToPlayer <= attackRadius)
+        {
+            // Attack the player
+            animator.SetTrigger("Attack");
+            playerTransform.GetComponent<PlayerController>().TakeDamage(damage);
+            agent.ResetPath(); // Stop moving while attacking
         }
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {

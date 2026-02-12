@@ -160,6 +160,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void TakeDamage(float damageAmount)
+    {
+        health -= damageAmount;
+        if (health < 0) 
+        {
+            health = 0;
+        }
+    }
     public void HealPlayer(float healAmount)
     {
         health += healAmount;
