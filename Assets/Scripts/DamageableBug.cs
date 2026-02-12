@@ -54,7 +54,7 @@ public class DamageableBug : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) playerTransform = player.transform;
-        healthBar = transform.Find("HealthBar").GetComponent<RectTransform>();
+        healthBar = transform.Find("HealthBar/Display").GetComponent<RectTransform>();
     }
 
     void Update()
@@ -91,7 +91,7 @@ public class DamageableBug : MonoBehaviour
     {
         Debug.Log("Bug took " + amount + " damage.");
         health -= amount;
-        healthBar.localScale = new Vector3(Mathf.Clamp01(health / maxHealth * 1.849104f), 0.1146779f, 1);
+        healthBar.sizeDelta = new Vector2((health / maxHealth) * 2, healthBar.sizeDelta.y);
         if (health <= 0)
         {
             Die();
