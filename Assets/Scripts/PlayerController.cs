@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -22,12 +23,16 @@ public class PlayerController : MonoBehaviour
     [Header("Attack Sounds")]
     public AudioClip attackSound1;
     public AudioClip attackSound2;
+    public AudioClip painSound1;
+    public AudioClip painSound2;
 
     [Header("Combat Misc Voices")]
     public AudioClip killed;
     public AudioClip teleported;
 
     private PlayerAnimController spriteAnimator;
+    [SerializeField]
+    public List<string> inventory = new List<string>();
     private UIBridge bridge;
     private AudioSource audioSource;
     private bool hasDoneAttackSound = false;
@@ -162,11 +167,38 @@ public class PlayerController : MonoBehaviour
     }
     public void TakeDamage(float damageAmount)
     {
+        bool playAlternatePainSound = Random.value > 0.5f;
+        if (playAlternatePainSound)        
+        {
+            audioSource.PlayOneShot(painSound1);
+        }
+        else        
+        {
+            audioSource.PlayOneShot(painSound2);
+        }
         health -= damageAmount;
         if (health < 0) 
         {
             health = 0;
         }
+        bridge.UpdateHealthBar(health / maxHealth);
+    }
+    public void GrantBuff(float healthRestore, float damageIncrease, float deltaDamageMultiplier, float quantity)
+    {
+        Debug.Log($"Granting buff: +{healthRestore} health, +{damageIncrease} damage, +{deltaDamageMultiplier} damage multiplier (x{quantity})");
+        health += healthRestore * quantity;
+        damage += damageIncrease * quantity;
+        damageMultiplier += deltaDamageMultiplier * quantity;
+        if (health > maxHealth) health = maxHealth;
+        bridge.UpdateHealthBar(health / maxHealth);
+    }
+    public void AddToInventory(string itemName, float quantity)
+    {
+        for (int i = 0; i < quantity; i++)
+        {
+            inventory.Add(itemName);
+        }
+        Debug.Log("Added " + itemName + " to inventory.");
     }
     public void HealPlayer(float healAmount)
     {

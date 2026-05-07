@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: bed7fa43a74e624e0ac5264053f614e2
+guid: 30ad3aa309ac42faf94ed4a62519496b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4951700465452354302
-    second: Chest_Opened_0
+      213: -5751491017538958474
+    second: Stronghold_Torch_0
+  - first:
+      213: -750518989280580621
+    second: Stronghold_Torch_1
+  - first:
+      213: 5268965002495429160
+    second: Stronghold_Torch_2
+  - first:
+      213: -2796061143507591618
+    second: Stronghold_Torch_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chest_Opened_0
+      name: Stronghold_Torch_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: efa8c6d8659f7b440800000000000000
-      internalID: 4951700465452354302
+      spriteID: 67b8dba64699e20b0800000000000000
+      internalID: -5751491017538958474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stronghold_Torch_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fbeeb6a4fe9595f0800000000000000
+      internalID: -750518989280580621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stronghold_Torch_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82a84bbe0cf1f1940800000000000000
+      internalID: 5268965002495429160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stronghold_Torch_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3e15f244356239d0800000000000000
+      internalID: -2796061143507591618
       vertices: []
       indices: 
       edges: []
@@ -125,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 99143d4ae5c3ed13884135dafd1b3d3c
+    spriteID: 8aa81400b149d55749c63ead4d5dc2fc
     internalID: 0
     vertices: []
     indices: 
@@ -133,9 +208,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Chest_Opened_0: 4951700465452354302
+      Stronghold_Torch_0: -5751491017538958474
+      Stronghold_Torch_1: -750518989280580621
+      Stronghold_Torch_2: 5268965002495429160
+      Stronghold_Torch_3: -2796061143507591618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 09c99fdbc44f341d990b29cb9e0cef69
+guid: 1547f3a15dd6f16209568b01118d1309
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3941785951951231629
-    second: Stronghold_Torch_0002_0
+      213: -4859979025085006458
+    second: TPMonster_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stronghold_Torch_0002_0
+      name: TPMonster_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 3
-        width: 20
-        height: 48
+        x: 11
+        y: 19
+        width: 98
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8a9da6507904b630800000000000000
-      internalID: 3941785951951231629
+      spriteID: 68d75f173d2ed8cb0800000000000000
+      internalID: -4859979025085006458
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Stronghold_Torch_0002_0: 3941785951951231629
+      TPMonster_0: -4859979025085006458
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dd7df289ac9f81baf9a1a6d33093e8b5
+guid: 66652e2ee264c08c49be153c4d4d5bf8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3264247401181004262
-    second: Stronghold_Torch_0001_0
+      213: -4319704446431489721
+    second: Easter_TrukSPPG_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stronghold_Torch_0001_0
+      name: Easter_TrukSPPG_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 3
-        width: 20
-        height: 48
+        x: 3
+        y: 23
+        width: 122
+        height: 90
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1e3d99884013b2d0800000000000000
-      internalID: -3264247401181004262
+      spriteID: 74196c751b35d04c0800000000000000
+      internalID: -4319704446431489721
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Stronghold_Torch_0001_0: -3264247401181004262
+      Easter_TrukSPPG_0: -4319704446431489721
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

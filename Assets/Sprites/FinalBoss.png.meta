@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bed7fa43a74e624e0ac5264053f614e2
+guid: f98ea78b2aae630f79c90a598f49f154
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4951700465452354302
-    second: Chest_Opened_0
+      213: 8824389556528078017
+    second: FinalBoss_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chest_Opened_0
+      name: FinalBoss_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 23
+        y: 23
+        width: 218
+        height: 210
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: efa8c6d8659f7b440800000000000000
-      internalID: 4951700465452354302
+      spriteID: 1ccd58c4c87867a70800000000000000
+      internalID: 8824389556528078017
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 99143d4ae5c3ed13884135dafd1b3d3c
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chest_Opened_0: 4951700465452354302
+      FinalBoss_0: 8824389556528078017
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

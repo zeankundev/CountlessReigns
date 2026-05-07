@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Animator))]
@@ -16,6 +17,7 @@ public class DamageableBug : MonoBehaviour
     public float damage = 20;
     public float health = 300;
     public float maxHealth = 300;
+    public bool allowUseOfPoisonSyringe = false;
 
     [Header("Post-Kill Rewards")]
     public float xp = 75;
@@ -57,6 +59,34 @@ public class DamageableBug : MonoBehaviour
         healthBar = transform.Find("HealthBar/Display").GetComponent<RectTransform>();
     }
 
+    private bool canAttack = true; // Add this field
+
+    IEnumerator AttackCooldown()
+    {
+        canAttack = false; // Block attacks immediately
+        float cooldown = 1.0f;
+
+        while (cooldown > 0f)
+        {
+            cooldown -= Time.deltaTime; // Count down every second in real time
+            yield return null;         // Wait one frame, then loop
+        }
+
+        canAttack = true; // Re-enable attacking after cooldown
+    }
+
+    IEnumerator PoisonSyringeEffect()
+    {
+        float duration = 5f;
+        float timer = 0f;
+        while (timer < duration)
+        {
+            TakeDamage(5 * Mathf.Pow(2, 5 - (health / maxHealth) * 5) * Time.deltaTime); // Apply poison damage over time
+            timer += Time.deltaTime;
+            yield return new WaitForSeconds(0.5f); // Apply damage every 0.5 seconds
+        }
+    }
+
     void Update()
     {
         if (playerTransform == null) return;
@@ -65,22 +95,32 @@ public class DamageableBug : MonoBehaviour
 
         if (distanceToPlayer <= detectionRadius)
         {
-            // The agent will now automatically stop 'keepDistance' units away
             agent.SetDestination(playerTransform.position);
             animator.SetBool("Is Moving", true);
+            bool playerHasPoisonSyringe = playerTransform.GetComponent<PlayerController>().inventory.Contains("Poison Syringe");
+            if (health / maxHealth <= 0.15f)
+            {
+                if (Keyboard.current.eKey.wasPressedThisFrame && allowUseOfPoisonSyringe && playerHasPoisonSyringe)
+                {
+                    Debug.Log("Using poison syringe on bug!");
+                    // Take an exponential amount of damage on one shot. First, it will deal a small damage, but as over time, the damage will increase dramatically, encouraging the player to use it early on and not wait until the bug is almost dead.
+                    StartCoroutine(PoisonSyringeEffect());
+                }
+            }
         }
         else
         {
-            // Clear path if player escapes radius
             if (agent.hasPath) agent.ResetPath();
         }
-        if (distanceToPlayer <= attackRadius)
+
+        if (distanceToPlayer <= attackRadius && canAttack) // ← Guard with canAttack
         {
-            // Attack the player
             animator.SetTrigger("Attack");
             playerTransform.GetComponent<PlayerController>().TakeDamage(damage);
-            agent.ResetPath(); // Stop moving while attacking
+            StartCoroutine(AttackCooldown());
+            agent.ResetPath();
         }
+
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
             animator.SetBool("Is Moving", false);
@@ -150,5 +190,8 @@ public class DamageableBug : MonoBehaviour
         // Visualize stop distance (the "no-push" zone)
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, keepDistance);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
 }

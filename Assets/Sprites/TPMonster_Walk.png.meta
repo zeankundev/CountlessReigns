@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: ab3d297e09abdb92687d48007f6ad106
+guid: abbad41738111ecaaa576af7fdbd9416
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8638741998151923801
-    second: Stronghold_Torch_0003_0
+      213: -1915511335388019885
+    second: TPMonster_Walk_0
+  - first:
+      213: -4954544091779968927
+    second: TPMonster_Walk_1
+  - first:
+      213: 440379717848686834
+    second: TPMonster_Walk_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stronghold_Torch_0003_0
+      name: TPMonster_Walk_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 3
-        width: 20
-        height: 44
+        x: 11
+        y: 15
+        width: 98
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 958f71ac31af2e770800000000000000
-      internalID: 8638741998151923801
+      spriteID: 35386fad69cba65e0800000000000000
+      internalID: -1915511335388019885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TPMonster_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 11
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 160d179166ced3bb0800000000000000
+      internalID: -4954544091779968927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TPMonster_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 11
+        width: 98
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f068a8250b8c1600800000000000000
+      internalID: 440379717848686834
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Stronghold_Torch_0003_0: 8638741998151923801
+      TPMonster_Walk_0: -1915511335388019885
+      TPMonster_Walk_1: -4954544091779968927
+      TPMonster_Walk_2: 440379717848686834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

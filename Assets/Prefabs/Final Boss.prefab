@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 863696693043972250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4412, y: 0.4412, z: 0.4412}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3034499200013673307}
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.03, y: 0.5535}
+  m_AnchoredPosition: {x: 0.45, y: -1.048}
   m_SizeDelta: {x: 3.5613, y: 0.3449}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7162378845012701554
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 2451627769796682060}
   - component: {fileID: 1112741565708089680}
   m_Layer: 0
-  m_Name: Small Bug
+  m_Name: Final Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -318,7 +318,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9, y: -2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.8771136, y: 2.8771136, z: 2.8771136}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8798168844652666561}
@@ -374,7 +374,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2685525624433918515, guid: 3361d3607a28d67a685b77f0146193c6, type: 3}
+  m_Sprite: {fileID: 8824389556528078017, guid: f98ea78b2aae630f79c90a598f49f154, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -434,14 +434,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageableBug
   detectionRadius: 5
   keepDistance: 1.2
-  attackRadius: 1.93
-  damage: 5
-  health: 300
-  maxHealth: 300
-  xp: 75
-  damageMultiplier: 1.5
-  extraHealth: 25
-  extraMaxHealth: 100
+  attackRadius: 1.19
+  damage: 50
+  health: 1000
+  maxHealth: 1000
+  xp: 100
+  damageMultiplier: 3
+  extraHealth: 250
+  extraMaxHealth: 500
   teleportPlayerBack: 0
   teleportLocation: {x: 0, y: -1.5}
 --- !u!195 &3089523895857254151
