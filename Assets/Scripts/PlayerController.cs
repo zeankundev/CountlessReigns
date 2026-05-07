@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimController spriteAnimator;
     [SerializeField]
     public List<string> inventory = new List<string>();
-    private UIBridge bridge;
+    [HideInInspector]
+    public UIBridge bridge;
     private AudioSource audioSource;
     private bool hasDoneAttackSound = false;
     private bool isFrozen = false;
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         bridge.DisplayText("", 2.0f);
+        bridge.UpdateHealthBar(health / maxHealth, health, maxHealth);
+        bridge.UpdateDamageStat(damage, damageMultiplier);
     }
 
     IEnumerator FreezeAsPartOfLore()
@@ -181,17 +184,9 @@ public class PlayerController : MonoBehaviour
         {
             health = 0;
         }
-        bridge.UpdateHealthBar(health / maxHealth);
+        bridge.UpdateHealthBar(health / maxHealth, health, maxHealth);
     }
-    public void GrantBuff(float healthRestore, float damageIncrease, float deltaDamageMultiplier, float quantity)
-    {
-        Debug.Log($"Granting buff: +{healthRestore} health, +{damageIncrease} damage, +{deltaDamageMultiplier} damage multiplier (x{quantity})");
-        health += healthRestore * quantity;
-        damage += damageIncrease * quantity;
-        damageMultiplier += deltaDamageMultiplier * quantity;
-        if (health > maxHealth) health = maxHealth;
-        bridge.UpdateHealthBar(health / maxHealth);
-    }
+    
     public void AddToInventory(string itemName, float quantity)
     {
         for (int i = 0; i < quantity; i++)
@@ -204,13 +199,28 @@ public class PlayerController : MonoBehaviour
     {
         health += healAmount;
         if (health > maxHealth) health = maxHealth;
+        bridge.UpdateHealthBar(health / maxHealth, health, maxHealth);
+    }
+    public void GrantBuff(float healthRestore, float damageIncrease, float deltaDamageMultiplier, float quantity)
+    {
+        Debug.Log($"Granting buff: +{healthRestore} health, +{damageIncrease} damage, +{deltaDamageMultiplier} damage multiplier (x{quantity})");
+        float healthPercentage = health / maxHealth;
+        health = healthPercentage * maxHealth + healthRestore;
+        damage += damageIncrease * quantity;
+        damageMultiplier += deltaDamageMultiplier * quantity;
+        if (health > maxHealth) health = maxHealth;
+        bridge.UpdateHealthBar(health / maxHealth, health, maxHealth);
+        bridge.UpdateDamageStat(damage, damageMultiplier);
     }
     public void GrantPlayerSomeBuff(float extraDamageMultiplier, float extraHealthAmount, float extraMaxHealthAmount, float extraXP)
     {
         damageMultiplier += extraDamageMultiplier;
+        float healthPercentage = health / maxHealth;
         maxHealth += extraMaxHealthAmount;
-        health += extraHealthAmount;
+        health = healthPercentage * maxHealth + extraHealthAmount;
         if (health > maxHealth) health = maxHealth;
         xp += extraXP;
+        bridge.UpdateHealthBar(health / maxHealth, health, maxHealth);
+        bridge.UpdateDamageStat(damage, damageMultiplier);
     }
 }

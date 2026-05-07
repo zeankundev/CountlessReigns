@@ -10,6 +10,8 @@ public class UIBridge : MonoBehaviour
     private GameObject timedStatusPieGameObject;
     private RectTransform playerHealthBar;
     public TMP_FontAsset font;
+    private TMP_Text healthText;
+    private TMP_Text damageStatText;
     private Image timedStatusPie;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -19,6 +21,8 @@ public class UIBridge : MonoBehaviour
         timedStatusPie = transform.Find("TimedParent/RotationalTimedStatus").GetComponent<Image>();
         timedStatusText = transform.Find("TimedParent/RotationalTimedStatus/TimedStatusText").GetComponent<TMP_Text>();
         playerHealthBar = transform.Find("PlayerHealthBar").GetComponent<RectTransform>();
+        healthText = transform.Find("HealthText").GetComponent<TMP_Text>();
+        damageStatText = transform.Find("DamageStatText").GetComponent<TMP_Text>();
         Debug.LogWarning(subtitleText);
     }
 
@@ -52,9 +56,14 @@ public class UIBridge : MonoBehaviour
     {
         timedStatusPie.fillAmount = normalizedTime;
     }
-    public void UpdateHealthBar(float healthPercent)
+    public void UpdateHealthBar(float healthPercent, float health, float maxHealth)
     {
         playerHealthBar.sizeDelta = new Vector2(healthPercent * 100, playerHealthBar.sizeDelta.y);
+        healthText.text = Mathf.CeilToInt(health).ToString() + " / " + Mathf.CeilToInt(maxHealth).ToString();
+    }
+    public void UpdateDamageStat(float damage, float damageMultiplier)
+    {
+        damageStatText.text = "Raw: " + Mathf.CeilToInt(damage).ToString() + " (" + damageMultiplier.ToString("0.00") + "x) = " + Mathf.CeilToInt(damage * damageMultiplier).ToString();
     }
 
     private int _activeItemCount = 0;

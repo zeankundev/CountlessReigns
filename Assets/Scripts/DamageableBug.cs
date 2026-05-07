@@ -92,19 +92,42 @@ public class DamageableBug : MonoBehaviour
         if (playerTransform == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        Transform keyPromptTransform = transform.Find("KeyPrompt");
+        GameObject keyPrompt = keyPromptTransform != null ? keyPromptTransform.gameObject : null;
+        if (keyPrompt != null) 
+        {
+            keyPrompt.SetActive(false); // Hide the key prompt by default
+        }
 
         if (distanceToPlayer <= detectionRadius)
         {
             agent.SetDestination(playerTransform.position);
             animator.SetBool("Is Moving", true);
-            bool playerHasPoisonSyringe = playerTransform.GetComponent<PlayerController>().inventory.Contains("Poison Syringe");
+            bool playerHasPoisonSyringe = playerTransform.GetComponent<PlayerController>().inventory.Contains("PoisonSyringe");
             if (health / maxHealth <= 0.15f)
             {
+                if (keyPrompt != null)
+                    keyPrompt.SetActive(true);
+                else
+                    Debug.LogWarning("KeyPrompt not found!");
                 if (Keyboard.current.eKey.wasPressedThisFrame && allowUseOfPoisonSyringe && playerHasPoisonSyringe)
                 {
                     Debug.Log("Using poison syringe on bug!");
+                    if (keyPrompt != null)
+                        keyPrompt.SetActive(false);
+                    else
+                        Debug.LogWarning("KeyPrompt not found!");
+                    playerTransform.GetComponent<PlayerController>().inventory.Remove("PoisonSyringe");
+                    playerTransform.GetComponent<PlayerController>().bridge.DisplayText("Used Poison Syringe! The bug is taking damage over time!", 2f);
                     // Take an exponential amount of damage on one shot. First, it will deal a small damage, but as over time, the damage will increase dramatically, encouraging the player to use it early on and not wait until the bug is almost dead.
                     StartCoroutine(PoisonSyringeEffect());
+                }
+            }
+            else
+            {
+                if (keyPrompt != null)
+                {
+                    keyPrompt.SetActive(false);
                 }
             }
         }

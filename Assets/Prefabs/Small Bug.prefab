@@ -438,8 +438,9 @@ MonoBehaviour:
   damage: 5
   health: 300
   maxHealth: 300
+  allowUseOfPoisonSyringe: 0
   xp: 75
-  damageMultiplier: 1.5
+  damageMultiplier: 0.002
   extraHealth: 25
   extraMaxHealth: 100
   teleportPlayerBack: 0

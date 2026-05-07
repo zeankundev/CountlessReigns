@@ -82,9 +82,10 @@ public class IntroStoryHandler : MonoBehaviour
             {
                 mainGameEntry.SetActive(true);
                 // fade out the raw image
-                RawImage rawImage = GameObject.Find("RawImage").GetComponent<RawImage>();
+                Image rawImage = GameObject.Find("RawImage").GetComponent<Image>();
                 rawImage.CrossFadeAlpha(0f, 2f, false);
                 StartCoroutine(DeactivateAfterDelay(2f));
+                GameObject.Find("RawImage").SetActive(false);
             }
         }
         // Run the credits the same thread along with the story cues

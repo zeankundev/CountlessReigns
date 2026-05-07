@@ -438,11 +438,12 @@ MonoBehaviour:
   damage: 50
   health: 1000
   maxHealth: 1000
+  allowUseOfPoisonSyringe: 0
   xp: 100
-  damageMultiplier: 3
+  damageMultiplier: 0.2
   extraHealth: 250
   extraMaxHealth: 500
-  teleportPlayerBack: 0
+  teleportPlayerBack: 1
   teleportLocation: {x: 0, y: -1.5}
 --- !u!195 &3089523895857254151
 NavMeshAgent:
@@ -503,7 +504,7 @@ Animator:
   m_GameObject: {fileID: 5696793267138413213}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6a776c324f2ca8c059e628e529f1e994, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5db92edbea0f42ecda7c5517ba51a61a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
