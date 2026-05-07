@@ -84,7 +84,6 @@ public class PlayerController : MonoBehaviour
 
             if (mouse.leftButton.wasPressedThisFrame)
             {
-                bridge.DisplayText("*thuds*", 1.0f);
                 Debug.Log("Attacking");
                 Collider2D[] hits = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y - 1.5f), attackRadius);
                 Debug.DrawLine(new Vector2(transform.position.x, transform.position.y - 1.5f) + Vector2.right * 0.1f, new Vector2(transform.position.x, transform.position.y - 1.5f) - Vector2.right * 0.1f, Color.red, attackRadius);
@@ -113,6 +112,7 @@ public class PlayerController : MonoBehaviour
                         }
                         else
                         {
+                            bridge.DisplayText("*thuds*", 1.0f);
                             if (!hasDoneAttackSound)
                             {
                                 audioSource.PlayOneShot(attackSound1);
