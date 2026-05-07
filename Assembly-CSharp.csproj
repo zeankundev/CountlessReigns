@@ -53,6 +53,7 @@
     <Compile Include="Assets/Scripts/IntroStoryHandler.cs" />
     <Compile Include="Assets/Scripts/PlayerController.cs" />
     <Compile Include="Assets/Scripts/UIBridge.cs" />
+    <Compile Include="Assets/Scripts/ChestController.cs" />
     <Compile Include="Assets/Scripts/DamageableBug.cs" />
     <Compile Include="Assets/Scripts/CameraController.cs" />
   </ItemGroup>
