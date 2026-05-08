@@ -12,31 +12,36 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float smoothTime = 0.15f;
     private Vector3 currentVelocity = Vector3.zero;
 
-    // No player search in Start — it may not exist during the intro.
-    void Start()
-    {
-        uiBridge = GameObject.Find("Canvas").GetComponent<UIBridge>();
-    }
-
     void Update()
     {
-        // Keep trying to find the player until it exists in the scene.
-        if (player == null)
+        // ── 1. Retry finding UIBridge until the Canvas exists in the scene ──
+        if (uiBridge == null)
         {
-            player = GameObject.Find("MainGame/Player");
+            GameObject canvas = GameObject.Find("Canvas");
+            if (canvas != null)
+                uiBridge = canvas.GetComponent<UIBridge>();
         }
 
-        if (Keyboard.current.lKey.wasPressedThisFrame)
+        // ── 2. Only run camera logic while MainGameplay is active ──
+        GameObject mainGameplay = GameObject.Find("MainGameplay");
+        if (mainGameplay == null || !mainGameplay.activeInHierarchy) return;
+
+        // ── 3. Retry finding the player until it spawns ──
+        if (player == null)
+            player = GameObject.Find("MainGame/Player");
+
+        // ── 4. Lock-toggle input ──
+        if (Keyboard.current != null && Keyboard.current.lKey.wasPressedThisFrame)
         {
             isLockedToPlayer = !isLockedToPlayer;
-            uiBridge.UpdateCamLockStatus(isLockedToPlayer);
+            uiBridge?.UpdateCamLockStatus(isLockedToPlayer); // null-safe call
             currentVelocity = Vector3.zero;
         }
 
+        // ── 5. Camera behaviour ──
         if (isLockedToPlayer)
         {
-            // Nothing to follow yet — stay put until the player exists.
-            if (player == null) return;
+            if (player == null) return; // player not spawned yet — stay put
 
             Vector3 targetPos = new Vector3(
                 player.transform.position.x,

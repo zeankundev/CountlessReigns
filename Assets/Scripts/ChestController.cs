@@ -23,6 +23,8 @@ public class ChestContent
     public string intenalCodeForUsables;
 }
 
+[RequireComponent(typeof(AudioSource))]
+
 public class ChestController : MonoBehaviour
 {
     private PlayerController player;
@@ -31,12 +33,15 @@ public class ChestController : MonoBehaviour
     public List<ChestContent> chestContents = new List<ChestContent>();
     public float activationRadius = 1.5f;
     public Sprite openedChestSprite;
+    public AudioClip chestOpenSound;
     private bool isOpened = false;
+    private AudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerObject = GameObject.Find("Player");
         player = playerObject.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -48,6 +53,7 @@ public class ChestController : MonoBehaviour
             transform.Find("KeyPrompt").gameObject.SetActive(true);
             if (Keyboard.current.eKey.wasPressedThisFrame && !isOpened)
             {
+                audioSource.PlayOneShot(chestOpenSound);
                 for (int i = 0; i < chestContents.Count; i++)
                 {
                     if (chestContents[i].type == ItemType.Buffs)
