@@ -61,6 +61,7 @@ public class IntroStoryHandler : MonoBehaviour
     IEnumerator DeactivateAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+        GameObject.Find("RawImage").SetActive(false);
     }
 
     // Update is called once per frame
