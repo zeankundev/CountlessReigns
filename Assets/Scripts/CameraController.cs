@@ -7,12 +7,16 @@ public class CameraController : MonoBehaviour
     private GameObject player;
 
     private Vector3 lastMousePosition;
+    private UIBridge uiBridge;
     [SerializeField] private float dragSensitivity = 0.5f;
     [SerializeField] private float smoothTime = 0.15f;
     private Vector3 currentVelocity = Vector3.zero;
 
     // No player search in Start — it may not exist during the intro.
-    void Start() { }
+    void Start()
+    {
+        uiBridge = GameObject.Find("Canvas").GetComponent<UIBridge>();
+    }
 
     void Update()
     {
@@ -25,6 +29,7 @@ public class CameraController : MonoBehaviour
         if (Keyboard.current.lKey.wasPressedThisFrame)
         {
             isLockedToPlayer = !isLockedToPlayer;
+            uiBridge.UpdateCamLockStatus(isLockedToPlayer);
             currentVelocity = Vector3.zero;
         }
 

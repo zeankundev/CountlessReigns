@@ -41,6 +41,7 @@ public class IntroStoryHandler : MonoBehaviour
     public List<Crediture> credits = new List<Crediture>();
     private TMP_Text storyText;
     private AudioSource narrationSource;
+    private bool hasTransitioned = false; // Add this at the top of your class
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -77,15 +78,19 @@ public class IntroStoryHandler : MonoBehaviour
                     storyText.CrossFadeAlpha(0f, alphaDuration, false);
                 }
             }
-            // If this is the last cue and the narration has finished, transition to the main game
-            if (i == storyCues.Count - 1 && narrationSource.time >= narrationSource.clip.length)
+            if (!hasTransitioned && i == storyCues.Count - 1 && narrationSource.time >= narrationSource.clip.length)
             {
+                hasTransitioned = true; // Ensure this block only runs ONCE
                 mainGameEntry.SetActive(true);
-                // fade out the raw image
-                Image rawImage = GameObject.Find("RawImage").GetComponent<Image>();
-                rawImage.CrossFadeAlpha(0f, 2f, false);
-                StartCoroutine(DeactivateAfterDelay(2f));
-                GameObject.Find("RawImage").SetActive(false);
+                
+                RawImage rawImage = GameObject.Find("RawImage").GetComponent<RawImage>();
+                if (rawImage != null)
+                {
+                    // Ensure alpha starts at 1 so it has somewhere to fade from
+                    rawImage.canvasRenderer.SetAlpha(1f); 
+                    rawImage.CrossFadeAlpha(0f, 2f, false);
+                    StartCoroutine(DeactivateAfterDelay(2f));
+                }
             }
         }
         // Run the credits the same thread along with the story cues

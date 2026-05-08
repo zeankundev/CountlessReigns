@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         } 
         isFrozen = false;
         agent.isStopped = false;
-        agent.SetDestination(new Vector3(0, -1.5f, 0));
+        agent.ResetPath();
         bridge.ToggleTimedStatusState(false);
     }
 

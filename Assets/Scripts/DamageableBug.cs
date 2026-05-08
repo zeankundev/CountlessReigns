@@ -77,13 +77,18 @@ public class DamageableBug : MonoBehaviour
 
     IEnumerator PoisonSyringeEffect()
     {
-        float duration = 5f;
+        float duration = 15f;
+        float tickInterval = 0.5f;
         float timer = 0f;
+
         while (timer < duration)
         {
-            TakeDamage(5 * Mathf.Pow(2, 5 - (health / maxHealth) * 5) * Time.deltaTime); // Apply poison damage over time
-            timer += Time.deltaTime;
-            yield return new WaitForSeconds(0.5f); // Apply damage every 0.5 seconds
+            float t = timer / duration; // Goes from 0 to 1 over the duration
+            float damage = Mathf.Lerp(1f, 200f, t * t) * tickInterval; // Exponential ramp: starts ~0.5, reaches ~100 per tick
+            TakeDamage(damage);
+
+            timer += tickInterval;
+            yield return new WaitForSeconds(tickInterval);
         }
     }
 

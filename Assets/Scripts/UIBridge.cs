@@ -10,9 +10,13 @@ public class UIBridge : MonoBehaviour
     private GameObject timedStatusPieGameObject;
     private RectTransform playerHealthBar;
     public TMP_FontAsset font;
+    public Sprite lockIcon;
+    public Sprite unlockIcon;
     private TMP_Text healthText;
     private TMP_Text damageStatText;
     private Image timedStatusPie;
+    private TMP_Text camLockStatusText;
+    private Image lockStatus;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -23,6 +27,11 @@ public class UIBridge : MonoBehaviour
         playerHealthBar = transform.Find("PlayerHealthBar").GetComponent<RectTransform>();
         healthText = transform.Find("HealthText").GetComponent<TMP_Text>();
         damageStatText = transform.Find("DamageStatText").GetComponent<TMP_Text>();
+        camLockStatusText = transform.Find("CamLockStatus").GetComponent<TMP_Text>();
+        lockStatus = transform.Find("LockStatus").GetComponent<Image>();
+
+        camLockStatusText.CrossFadeAlpha(0f, 0f, false);
+        lockStatus.CrossFadeAlpha(0f, 0f, false);
         Debug.LogWarning(subtitleText);
     }
 
@@ -30,6 +39,23 @@ public class UIBridge : MonoBehaviour
     void Update()
     {
         
+    }
+    public void UpdateCamLockStatus(bool isLocked)
+    {
+        camLockStatusText.CrossFadeAlpha(1f, 0f, false);
+        lockStatus.CrossFadeAlpha(1f, 0f, false);
+        if (isLocked)
+        {
+            camLockStatusText.text = "Camera Locked";
+            lockStatus.sprite = lockIcon;
+        }
+        else
+        {
+            camLockStatusText.text = "Camera Unlocked";
+            lockStatus.sprite = unlockIcon;
+        }
+        camLockStatusText.CrossFadeAlpha(0f, 1f, false);
+        lockStatus.CrossFadeAlpha(0f, 1f, false);
     }
     public void DisplayText(string text, float duration)
     {
